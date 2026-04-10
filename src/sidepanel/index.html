@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open-Do Cloud</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="../lib/puter.js"></script>
+</head>
+<body>
+  <div class="glass-container">
+    <header class="header">
+      <h1>Open-Do</h1>
+      <div id="auth-container" style="display: flex; align-items: center; gap: 8px;">
+        <button id="settings-btn" class="btn" style="padding: 8px; flex: 0 0 auto; background: transparent; border: 1px solid var(--glass-border);">⚙️</button>
+        <button id="auth-btn" class="btn primary-btn" style="padding: 8px 12px; font-size: 0.8rem;">Sign in with Puter</button>
+        <div id="user-info" style="display: none; align-items: center; gap: 8px;">
+          <span id="username-display" style="font-size: 0.85rem; color: var(--text-muted);"></span>
+          <button id="logout-btn" class="btn danger-btn" style="padding: 6px 10px; font-size: 0.75rem;">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Settings Overlay Panel -->
+    <div id="settings-panel" class="settings-panel" style="display: none;">
+      <div class="settings-content">
+        <div class="settings-header">
+          <h3>AI Settings</h3>
+          <button id="close-settings" class="btn small-btn">✕</button>
+        </div>
+        
+        <div class="setting-group">
+          <label for="ai-provider">AI Provider</label>
+          <select id="ai-provider">
+            <option value="puter">Puter (Cloud Claude 3.5)</option>
+            <option value="ollama">Ollama (Local LLM)</option>
+          </select>
+        </div>
+
+        <div id="ollama-settings" style="display: none;">
+          <div class="setting-group">
+            <label for="ollama-url">Ollama Base URL</label>
+            <input type="text" id="ollama-url" placeholder="http://localhost:11434" value="http://localhost:11434">
+          </div>
+          <div class="setting-group">
+            <label for="ollama-model">Model Name</label>
+            <input type="text" id="ollama-model" placeholder="llama3" value="llama3">
+          </div>
+          <div class="setting-group">
+            <label for="ollama-key">API Key (Optional)</label>
+            <input type="password" id="ollama-key" placeholder="Enter key if using proxy">
+          </div>
+        </div>
+
+        <button id="save-settings" class="btn primary-btn" style="margin-top: 10px; width: 100%;">Save & Apply</button>
+      </div>
+    </div>
+
+    <div class="status-bar" id="status-bar">
+      <div class="status-indicator" id="status-indicator"></div>
+      <span id="status-text">OFFLINE</span>
+    </div>
+
+    <!-- The Artifact Feed for Action Cards -->
+    <main class="feed" id="action-feed">
+      <div class="welcome-card card">
+        <h3>Welcome to Open-Do Cloud! ☁️</h3>
+        <p>Please log in with Puter to enable cloud intelligence.</p>
+      </div>
+    </main>
+
+    <footer class="input-area" id="input-area" style="opacity: 0.5; pointer-events: none; transition: 0.3s">
+      <textarea id="task-input" placeholder="What should I do? (e.g. 'Search for a laptop')" rows="2"></textarea>
+      <div class="action-buttons">
+        <button id="send-btn" class="btn primary-btn">Execute</button>
+        <button id="kill-btn" class="btn danger-btn">EMERGENCY STOP</button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="ui.js" type="module"></script>
+</body>
+</html>
